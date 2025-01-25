@@ -1,0 +1,14 @@
+{
+  "name": "medium-extension",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "wink-eng-lite-web-model": "^1.7.1",
+    "wink-nlp": "^2.2.2"
+  },
+  "devDependencies": {
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1"
+  }
+}

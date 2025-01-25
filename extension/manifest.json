@@ -1,0 +1,29 @@
+{
+  "name": "Medium Reader",
+  "version": "1.0",
+  "description": "Read Medium blogs without subscription.",
+  "manifest_version": 3,
+  "permissions": ["activeTab", "scripting", "contextMenus", "tabs"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/unlock-16.png",
+      "48": "icons/unlock-48.png",
+      "128": "icons/unlock-128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://medium.com/*"],
+      "js": ["dist/content.js"]
+    }
+  ],
+  "icons": {
+    "16": "icons/unlock-16.png",
+    "48": "icons/unlock-48.png",
+    "128": "icons/unlock-128.png"
+  }
+}
