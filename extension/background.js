@@ -7,7 +7,7 @@ chrome.runtime.onInstalled.addListener(() => {
 
   chrome.contextMenus.create({
     id: "read-with-readmedium",
-    title: "Read with readmedium.com",
+    title: "Read with readmedium",
     contexts: ["all"],
     parentId: "unlock-medium-post",
   });
@@ -19,15 +19,24 @@ chrome.runtime.onInstalled.addListener(() => {
     parentId: "unlock-medium-post",
   });
 
+  // google cached pages
+  chrome.contextMenus.create({
+    id: "google-cache",
+    title: "Google Cached Page",
+    contexts: ["all"],
+    parentId: "unlock-medium-post",
+  });
+
   chrome.contextMenus.update("unlock-medium-post", { enabled: false });
 });
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  if (changeInfo.status === "complete" && tab.url) {
-    const isMediumPost = tab.url.includes("medium.com");
+  // if (changeInfo.status === "complete" && tab.url) {
+  //   const isMediumPost = tab.url.includes("medium.com");
 
-    chrome.contextMenus.update("unlock-medium-post", { enabled: isMediumPost });
-  }
+  //   chrome.contextMenus.update("unlock-medium-post", { enabled: isMediumPost });
+  // }
+    chrome.contextMenus.update("unlock-medium-post", { enabled: true });
 });
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
@@ -42,7 +51,14 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
   }
 
   if (info.menuItemId === "read-with-freedium") {
-    const freediumUrl = "https://freedium.com/" + encodeURIComponent(mediumUrl);
+    const freediumUrl = "https://freedium.cfd/" + encodeURIComponent(mediumUrl);
     chrome.tabs.create({ url: freediumUrl });
+  }
+
+  if (info.menuItemId === "google-cache") {
+    const googleCacheUrl =
+      "https://webcache.googleusercontent.com/search?q=cache:" +
+      encodeURIComponent(mediumUrl);
+    chrome.tabs.create({ url: googleCacheUrl });
   }
 });

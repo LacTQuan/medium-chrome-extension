@@ -7,7 +7,7 @@ chrome.runtime.onInstalled.addListener(() => {
 
   chrome.contextMenus.create({
     id: "read-with-readmedium",
-    title: "Read with readmedium.com",
+    title: "Read with readmedium",
     contexts: ["all"],
     parentId: "unlock-medium-post",
   });
