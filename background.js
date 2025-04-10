@@ -19,6 +19,14 @@ chrome.runtime.onInstalled.addListener(() => {
     parentId: "unlock-medium-post",
   });
 
+  // google cached pages
+  chrome.contextMenus.create({
+    id: "google-cache",
+    title: "Google Cached Page",
+    contexts: ["all"],
+    parentId: "unlock-medium-post",
+  });
+
   chrome.contextMenus.update("unlock-medium-post", { enabled: false });
 });
 
@@ -43,7 +51,14 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
   }
 
   if (info.menuItemId === "read-with-freedium") {
-    const freediumUrl = "https://freedium.com/" + encodeURIComponent(mediumUrl);
+    const freediumUrl = "https://freedium.cfd/" + encodeURIComponent(mediumUrl);
     chrome.tabs.create({ url: freediumUrl });
+  }
+
+  if (info.menuItemId === "google-cache") {
+    const googleCacheUrl =
+      "https://webcache.googleusercontent.com/search?q=cache:" +
+      encodeURIComponent(mediumUrl);
+    chrome.tabs.create({ url: googleCacheUrl });
   }
 });
